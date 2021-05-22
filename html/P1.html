@@ -1,0 +1,241 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>P01: Se&ntilde;ales en tiempo continuo.</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-22"><meta name="DC.source" content="P1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>P01: Se&ntilde;ales en tiempo continuo.</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Seccion 1.11 del Lathi.</a></li><li><a href="#2">1.11-1: Funciones an&oacute;nimas.</a></li><li><a href="#9">1.11-2: Operadores relacionales y la funcion paso unitario.</a></li><li><a href="#17">1.11-3: Vizualizando</a></li><li><a href="#24">1.11-4: Integracion numerica y Estimacion de la energia de la se&ntilde;al.</a></li></ul></div><h2 id="1">Seccion 1.11 del Lathi.</h2><h2 id="2">1.11-1: Funciones an&oacute;nimas.</h2><p>Representar la se&ntilde;al f(t)=e^(-t)cos(2&#960;t) en un intervalo entre -2 y 2.</p><pre class="codeinput">f = @(t) exp(-t).*cos(2*pi*t);
+t=0; f(t)
+</pre><pre class="codeoutput">
+ans =
+
+     1
+
+</pre><pre class="codeinput">f(0)
+</pre><pre class="codeoutput">
+ans =
+
+     1
+
+</pre><pre class="codeinput">t=(-2:2);
+f(t)
+</pre><pre class="codeoutput">
+ans =
+
+    7.3891    2.7183    1.0000    0.3679    0.1353
+
+</pre><pre class="codeinput">plot(t,f(t));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); grid;
+</pre><img vspace="5" hspace="5" src="P1_01.png" alt=""> <p>Ahora modificaremos el avance para hacer a la grafica mas detallada de 1 a 0.01 de avance.</p><pre class="codeinput">t=(-2:0.01:2);
+plot(t,f(t));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); grid;
+</pre><img vspace="5" hspace="5" src="P1_02.png" alt=""> <h2 id="9">1.11-2: Operadores relacionales y la funcion paso unitario.</h2><p>Tenemos seis operadores relacionales: &lt;, &gt;, &lt;=, &gt;=, ==, y ~=. Primero usamos el &gt;= operador relacional para graficar entre -2 y 2.</p><pre class="codeinput">u= @(t) 1.0.*(t&gt;=0);
+</pre><pre class="codeinput">t=(-2:2);plot(t,u(t));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'u(t)'</span>);grid;
+</pre><img vspace="5" hspace="5" src="P1_03.png" alt=""> <p>Ahora modificaremos el avance para hacer a la grafica mas detallada de 1 a 0.01 de avance.</p><pre class="codeinput">t = (-2:0.01:2); plot(t,u(t));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'u(t)'</span>);
+axis([-2 2 -0.1 1.1]);
+</pre><img vspace="5" hspace="5" src="P1_04.png" alt=""> <pre class="codeinput"><span class="comment">%Ahora le hacemos un corte cuando la grafica cuando t-1.</span>
+</pre><pre class="codeinput">p = @(t) 1.0.*((t&gt;=0)&amp;(t&lt;1));
+</pre><pre class="codeinput">t = (-1:0.01:2); plot(t,p(t));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'p(t) = u(t)-u(t-1)'</span>);
+ axis([-1 2 -.1 1.1]);
+</pre><img vspace="5" hspace="5" src="P1_05.png" alt=""> <h2 id="17">1.11-3: Vizualizando</h2><p>g(t) = f(t)u(t) = e&#8722;t cos(2&#960;t)u(t) y para graficar g(t) multiplicamos las funciones anonimas f(t) y U(t) entre -2 y 2 con un paso de .01.</p><pre class="codeinput">g = @(t) f(t).*u(t);
+t = (-2:0.01:2);
+plot(t,g(2*t+1)); xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g(2t+1)'</span>); grid;
+</pre><img vspace="5" hspace="5" src="P1_06.png" alt=""> <p>Ahora en vez de que g(t)=(2t+1) haremos que sea (-t+1) entre -2 y 2.</p><pre class="codeinput">plot(t,g(-t+1)); xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g(-t+1)'</span>); grid;
+</pre><img vspace="5" hspace="5" src="P1_07.png" alt=""> <p>Por ultimo hacemos que se sumen las dos funciones anteriores</p><pre class="codeinput"><span class="comment">%g(t)=(2t+1)+(-t+1).</span>
+</pre><pre class="codeinput">plot(t,g(2*t+1)+g(-t+1)); xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'h(t)'</span>); grid;
+</pre><img vspace="5" hspace="5" src="P1_08.png" alt=""> <h2 id="24">1.11-4: Integracion numerica y Estimacion de la energia de la se&ntilde;al.</h2><p>Aqui debemos sacar la energia de la se&ntilde;al x(t) = e&#8722;t(u(t)&#8722;u(t&#8722;1)).</p><pre class="codeinput">x = @(t) exp(-t).*((t&gt;=0)&amp;(t&lt;1));
+</pre><pre class="codeinput"> t = (0:0.01:1);
+ E_x = sum(x(t).*x(t)*0.01)
+</pre><pre class="codeoutput">
+E_x =
+
+    0.4367
+
+</pre><p>Ahora tomaremos en cuenta el error relativo de la se&ntilde;al.</p><pre class="codeinput">  x_squared = @(t) x(t).*x(t);
+  E_x = quad(x_squared,0,1)
+</pre><pre class="codeoutput">
+E_x =
+
+    0.4323
+
+</pre><p>En este caso es de -.0026%</p><p>Eg = integrar (e&#8722;2t cos2 (2&#960;t)dt) entre infinito y 0 para dar una respuesta mas rapido.</p><pre class="codeinput">   g_squared = @(t) g(t).*g(t);
+   t = (0:0.001:100);
+   E_g = sum(g_squared(t)*0.001)
+</pre><pre class="codeoutput">
+E_g =
+
+    0.2567
+
+</pre><pre class="codeinput">    E_g = quad(g_squared,0,100)
+</pre><pre class="codeoutput">
+E_g =
+
+    0.2562
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% P01: Señales en tiempo continuo.
+%
+%
+%% Seccion 1.11 del Lathi.
+%% 1.11-1: Funciones anónimas. 
+%
+% Representar la señal f(t)=e^(-t)cos(2πt) en un
+% intervalo entre -2 y 2.
+f = @(t) exp(-t).*cos(2*pi*t);
+t=0; f(t)
+%%
+f(0)
+%%
+t=(-2:2);
+f(t)
+%%
+plot(t,f(t));
+xlabel('t'); ylabel('f(t)'); grid;
+%%
+% Ahora modificaremos el avance para hacer a la grafica 
+% mas detallada de 1 a 0.01 de avance.
+%%
+t=(-2:0.01:2);
+plot(t,f(t));
+xlabel('t'); ylabel('f(t)'); grid;
+%%
+%% 1.11-2: Operadores relacionales y la funcion paso unitario.
+%
+% Tenemos seis operadores relacionales: <, >, <=, >=, ==, y ~=.
+% Primero usamos el >= operador relacional para graficar entre -2 y 2.
+%%
+u= @(t) 1.0.*(t>=0);
+%%
+t=(-2:2);plot(t,u(t));
+xlabel('t'); ylabel('u(t)');grid;
+%%
+% Ahora modificaremos el avance para hacer a la grafica 
+% mas detallada de 1 a 0.01 de avance.
+%%
+t = (-2:0.01:2); plot(t,u(t));
+xlabel('t'); ylabel('u(t)');
+axis([-2 2 -0.1 1.1]);
+%%
+%Ahora le hacemos un corte cuando la grafica cuando t-1.
+%%
+p = @(t) 1.0.*((t>=0)&(t<1));
+%%
+t = (-1:0.01:2); plot(t,p(t));
+xlabel('t'); ylabel('p(t) = u(t)-u(t-1)');
+ axis([-1 2 -.1 1.1]);
+%% 1.11-3: Vizualizando  
+% g(t) = f(t)u(t) = e−t cos(2πt)u(t) y para graficar g(t) multiplicamos las
+% funciones anonimas f(t) y U(t) entre -2 y 2 con un paso de .01.
+%%
+g = @(t) f(t).*u(t);
+t = (-2:0.01:2);
+plot(t,g(2*t+1)); xlabel('t'); ylabel('g(2t+1)'); grid;
+%%
+% Ahora en vez de que g(t)=(2t+1) haremos que sea (-t+1) entre -2 y 2.
+%%
+plot(t,g(-t+1)); xlabel('t'); ylabel('g(-t+1)'); grid;
+%%
+% Por ultimo hacemos que se sumen las dos funciones anteriores
+%g(t)=(2t+1)+(-t+1).
+%%
+plot(t,g(2*t+1)+g(-t+1)); xlabel('t'); ylabel('h(t)'); grid;
+%%
+%% 1.11-4: Integracion numerica y Estimacion de la energia de la señal.
+%
+% Aqui debemos sacar la energia de la señal x(t) = e−t(u(t)−u(t−1)).
+%%
+x = @(t) exp(-t).*((t>=0)&(t<1));
+%%
+ t = (0:0.01:1);
+ E_x = sum(x(t).*x(t)*0.01)
+ %%
+ % Ahora tomaremos en cuenta el error relativo de la señal.
+ %%
+  x_squared = @(t) x(t).*x(t);
+  E_x = quad(x_squared,0,1)
+  %%
+  % En este caso es de -.0026%
+  %%
+  % Eg = integrar (e−2t cos2 (2πt)dt) entre infinito y 0 para dar una respuesta mas rapido.
+  %%
+   g_squared = @(t) g(t).*g(t);
+   t = (0:0.001:100);
+   E_g = sum(g_squared(t)*0.001)
+   %%
+    E_g = quad(g_squared,0,100)
+    %%
+    
+  
+  
+
+ 
+ 
+##### SOURCE END #####
+--></body></html>
